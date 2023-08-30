@@ -1,4 +1,4 @@
--- Packer is our plugin manager of choice.
+-- Packer is our plugin manager of choice
 -- Here we make sure that the plugins are installed, most are then configured in the own files under plugin/after
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
@@ -57,5 +57,36 @@ return require('packer').startup(function(use)
 
     -- Vim navigation integration with Tmux
     use ( 'christoomey/vim-tmux-navigator', { lazy = false } )
+
+    -- Null ls - auto formatter
+    use ( 'jose-elias-alvarez/null-ls.nvim' )
+
+    -- NVIM DAP - debugger
+    use ( 'mfussenegger/nvim-dap' )
+
+    -- Nvim-dap-go - Integrating Delve go debugger into nvim dap
+    use { 'dreamsofcode-io/nvim-dap-go',
+            ft = 'go',
+            dependencies = 'mfussenegger/nvim-dap'
+    }
+
+    -- Gopher-nvim - More go functionality
+    use {
+        'olexsmir/gopher.nvim',
+        ft = 'go',
+        -- build = function()
+            -- vim.cmd.GoInstallDeps()
+        -- end
+    }
+    -- Comment.nvim - Commenting functionality
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+    -- Rust tools
+    use ( 'simrat39/rust-tools.nvim' )
 
 end)

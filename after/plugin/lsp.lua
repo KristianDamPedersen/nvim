@@ -6,8 +6,13 @@ lsp.preset("recommended")
 lsp.ensure_installed({
 	"gopls",
 	"tsserver",
-	"eslint"
+	"eslint",
+    "pyright",
+    "svelte",
+    "rust_analyzer",
+    "volar" -- Vue language server
 })
+
 
 -- Keybindings
 local cmp = require("cmp")
@@ -44,6 +49,19 @@ lsp.on_attach(function(client, bufnr)
 	-- Signature help
 	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
+-- LSP SETTINGS
+-- Gopls settings
+require('lspconfig').gopls.setup({
+    on_attach = on_attach,
+    settings = {
+        gopls = {
+            usePlaceholders = true,
+            analyses = {
+                unusedparams = true,
+            }
+        }
+    }
+})
 
 lsp.setup()
 
