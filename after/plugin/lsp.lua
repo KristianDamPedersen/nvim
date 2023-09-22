@@ -64,6 +64,22 @@ require('lspconfig').gopls.setup({
 })
 
 lsp.setup()
+-- SPARQL settings
+local lsp_configurations = require('lspconfig.configs')
+
+if not lsp_configurations.sparql then 
+    lsp_configurations.sparql = { 
+        default_config = {
+            name = 'sparql',
+            cmd = { "node", os.getenv("NVM_BIN") .. "/sparql-language-server", "--stdio" },
+            filetypes = {'sparql', 'rq'},
+            root_dir = require('lspconfig.util').find_git_ancestor or vim.fn.getcwd(),
+            single_file_support = true
+        }
+}
+end
+
+require('lspconfig').sparql.setup({})
 
 
 

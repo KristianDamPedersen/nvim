@@ -89,4 +89,7 @@ return require('packer').startup(function(use)
     -- Rust tools
     use ( 'simrat39/rust-tools.nvim' )
 
+    -- Jupyter notebooks
+    use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
+
 end)
